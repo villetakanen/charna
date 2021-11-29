@@ -2,7 +2,8 @@
   "name": "Basic Character Sheet",
   "system": "Generic",
   "meta": {
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "License": "CC BY-NC-SA 4.0"
   },
   "props": {
     "playerName": {
