@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint . --fix --ext .ts"
   },
   "keywords": [],
   "author": "",

@@ -12,8 +12,9 @@ interface Stat {
 interface CharacterSheetModel {
   name: string
   system: string
-  properties: { [key: string]: string }
-  stats: { [key: string]: Stat }
+  meta?: { [key: string]: string }
+  properties?: { [key: string]: string }
+  stats?: { [key: string]: Stat }
 }
 
 export {

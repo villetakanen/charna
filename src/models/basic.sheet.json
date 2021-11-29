@@ -1,0 +1,35 @@
+{
+  "name": "Basic Character Sheet",
+  "system": "Generic",
+  "meta": {
+    "version": "1.0.0"
+  },
+  "props": {
+    "playerName": {
+      "name": "Player Name",
+      "type": "string",
+      "default": "",
+      "description": "The name of the player."
+    }
+  },
+  "stats": {
+    "description": {
+        "name": "Description",
+        "type": "string",
+        "default": "",
+        "description": "A description of the character."
+        }
+    },
+    "HP": {
+        "name": "Hit Points",
+        "type": "derived",
+        "formula": "level * 10",
+        "description": "The number of hit points the character has."
+    },
+    "level": {
+        "name": "Level",
+        "type": "number",
+        "default": 1,
+        "description": "The level of the character."
+    }
+}
