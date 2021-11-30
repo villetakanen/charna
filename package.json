@@ -3,16 +3,20 @@
   "version": "0.1.1",
   "description": "Typed Character sheet model for pen-and-paper role playing games",
   "main": "index.js",
+  "author": "Ville Takanen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/villetakanen/charna.git"
+  },
   "scripts": {
     "test": "jest",
     "build": "tsc",
     "lint": "eslint . --fix --ext .ts",
     "coverage": "jest --coverage",
     "release": "standard-version",
-    "prepare": "husky install"
+    "prepare": "npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["character", "sheet", "role", "playing", "game", "pen-and-paper"],
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
