@@ -50,10 +50,72 @@ describe('CharacterSheet', () => {
     expect(sheet.getStat('strength')?.value).toEqual(1)
   })
 
+  it('should support setting string stats', () => {
+    const sheet = new CharacterSheet('test')
+    sheet.model = { id: 'test', stats: {
+      name: {
+        type: 'string'
+      }
+    }}
+    sheet.setStat('name', 'test')
+    expect(sheet.getStat('name')?.value).toEqual('test')
+  })
+
   it('should not support setting stats, not in the sheet-model', () => {
     const sheet = new CharacterSheet('test')
     sheet.model = { id: 'test', stats: {}}
     sheet.setStat('invalid', 1)
     expect(sheet.getStat('invalid')).toBeUndefined()
+  })
+
+  it('should throw an error when setting a composite stat', () => {
+    const sheet = new CharacterSheet('test')
+    sheet.model = { id: 'test', stats: {
+      strength: {
+        type: 'composite'
+      }
+    }}
+    expect(() => sheet.setStat('strength', 1)).toThrow('Cannot set value on a composite stat')
+  })
+
+  it('should support setting a model', () => {
+    const sheet = new CharacterSheet('test')
+    const m = { id: 'test', stats: {
+      strength: {
+        type: 'number'
+      }
+    }}
+    sheet.model = m
+    expect(sheet.model).toEqual(m)
+  })
+
+  it('should support setting an empty model', () => {
+    const sheet = new CharacterSheet('test')
+    const m = { id: 'test', stats: {
+      strength: {
+        type: 'number'
+      }
+    }}
+    sheet.model = m
+    sheet.model = { id: '', stats: {}}
+    expect(sheet.model).toEqual({ id: '', stats: {}})
+  })
+
+  it ('should not reinitialize a stat', () => {
+    const sheet = new CharacterSheet('test')
+    sheet.model = { id: 'test', stats: {
+      strength: {
+        type: 'number',
+        initialValue: 10
+      }
+    }}
+    sheet.setStat('strength', 1)
+    sheet.model = { id: 'test', stats: {
+      strength: {
+        type: 'number',
+        initialValue: 11
+      }
+    }}
+    expect(sheet.getStat('strength')?.value).toEqual(1)
   })
 })

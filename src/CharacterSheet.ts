@@ -20,7 +20,7 @@ export class Stat implements StatModel{
       if (this._value === undefined) return 0
       return this._value as number
     }
-    return 0
+    return this._value as string
   }
 
   set value(value:number|string) {
@@ -59,14 +59,19 @@ export class CharacterSheet {
     this._model = model
     this.initializeStats()
   }
-  get model(): SheetModel {
-    return this._model || { name: '', system: '', properties: {}, stats: {} }
+  get model(): SheetModel{
+    return this._model
   }
 
   private initializeStats() {
     Object.keys(this._model.stats).forEach(statName => {
       if (this._stats.has(statName)) return
-      const stat = new Stat(this._model.stats[statName].type, this._model.stats[statName].initialValue)
+
+      // Create a character stat for each stat in the current model
+      const stat = new Stat(
+        this._model.stats[statName].type, 
+        this._model.stats[statName].initialValue
+      )
       this._stats.set(statName, stat)
     })
   }
