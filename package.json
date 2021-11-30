@@ -7,18 +7,29 @@
     "test": "jest",
     "build": "tsc",
     "lint": "eslint . --fix --ext .ts",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "release": "standard-version"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@types/jest": "^27.0.3",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "commitizen": "^4.2.4",
     "eslint": "^8.3.0",
+    "husky": "^7.0.4",
     "jest": "^27.3.1",
+    "standard-version": "^9.3.2",
     "ts-jest": "^27.0.7",
     "typescript": "^4.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
