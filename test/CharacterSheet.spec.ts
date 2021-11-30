@@ -1,4 +1,4 @@
-import { CharacterSheet } from '../src/charna'
+import { CharacterSheet } from '../src'
 
 describe('CharacterSheet', () => {
   it('should be defined', () => {
@@ -143,5 +143,28 @@ describe('CharacterSheet', () => {
       }
     }}
     expect(sheet.getStat('strength')?.value).toEqual(21)
+  })
+
+  it('should distill to consumable json', () => {
+    const sheet = new CharacterSheet('test-sheet')
+    sheet.model = { id: 'test-sheet-model', stats: {
+      strength: {
+        type: 'composite',
+        formula: '10 + dexterity'
+      },
+      dexterity: {
+        type: 'number',
+        initialValue: 11
+      }
+    }}
+    const json = sheet.toJSON()
+    expect(json).toEqual({
+      id: 'test-sheet',
+      sheetModel: 'test-sheet-model',
+      stats: { 
+        strength: 21,
+        dexterity: 11
+      }
+    })
   })
 })

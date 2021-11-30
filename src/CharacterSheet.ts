@@ -49,9 +49,17 @@ export class Stat implements StatModel{
     })
     return evaluate(formula)
   }
-
 }
 
+/**
+ * A model for a character sheet. 
+ * 
+ * Stats are stored in a map of stat names to Stat objects.
+ * 
+ * The sheet is identified by a unique id.
+ * 
+ * The sheet can be serialized to a JSON object.
+ */
 export class CharacterSheet {
   id: string
   private _model: SheetModel = { id: '', stats: {} }
@@ -64,6 +72,7 @@ export class CharacterSheet {
   public getStat (statName: string): Stat|undefined{
     return this._stats.get(statName)
   }
+
   public setStat (statName: string, value: number|string): void {
     if (!this._stats.has(statName)) return
     const stat = this._stats.get(statName)
@@ -74,6 +83,7 @@ export class CharacterSheet {
     this._model = model
     this.initializeStats()
   }
+
   get model(): SheetModel{
     return this._model
   }
@@ -97,5 +107,19 @@ export class CharacterSheet {
       if (modelStat.formula) stat.formula = modelStat.formula
       this._stats.set(statName, stat)
     })
+  }
+
+  toJSON () {
+
+    const stats: {[key: string]: string|number } = {} 
+    this.statKeys().forEach(key => {
+      stats[key] = this.getStat(key)?.value || 0
+    })
+
+    return {
+      id: this.id,
+      sheetModel: this._model.id,
+      stats: stats
+    }
   }
 }
