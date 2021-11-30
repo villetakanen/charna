@@ -1,6 +1,6 @@
 {
   "name": "charna",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typed Character sheet model for pen-and-paper role playing games",
   "main": "index.js",
   "author": "Ville Takanen",
@@ -16,7 +16,14 @@
     "release": "standard-version",
     "prepare": "npm run build"
   },
-  "keywords": ["character", "sheet", "role", "playing", "game", "pen-and-paper"],
+  "keywords": [
+    "character",
+    "sheet",
+    "role",
+    "playing",
+    "game",
+    "pen-and-paper"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",

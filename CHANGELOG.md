@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.2](https://github.com/villetakanen/charna/compare/v0.1.1...v0.1.2) (2021-11-30)
 
+
+### Bug Fixes
+
+* added tojson for serialization ([f1a1477](https://github.com/villetakanen/charna/commit/f1a14779688535afda4ff46625b95f1a032c09bb))
+* added tojson for serialization ([075dd58](https://github.com/villetakanen/charna/commit/075dd581d15786f9dba51d84675e21b600e6bb6e))
+
+### [0.1.2](https://github.com/villetakanen/charna/compare/v0.1.1...v0.1.2) (2021-11-30)
+
 ### [0.1.1](https://github.com/villetakanen/charna/compare/v0.1.0...v0.1.1) (2021-11-30)
 
 
