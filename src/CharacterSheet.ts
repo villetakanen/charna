@@ -1,21 +1,26 @@
 import { SheetModel} from './models/SheetModel'
 import { StatModel } from './models/StatModel'
+import { evaluate } from 'mathjs'
+import { logDebug } from './utils/logger'
 
 export class Stat implements StatModel{
   type: string
   private _value: number|string|undefined
   private _isComposite: boolean
+  formula?: string | undefined;
+  _sheet: CharacterSheet
 
-  constructor(type:string, initilaValue?:number|string) {
+  constructor(sheet:CharacterSheet, type:string, initilaValue?:number|string) {
     this.type = type
     this._isComposite = type === 'composite'
+    this._sheet = sheet
     if (typeof initilaValue !== 'undefined') {
       this.value = initilaValue
     } 
   }
 
   get value(): number|string {
-    if (this._isComposite) return -1
+    if (this._isComposite) return this.evalCompoundStat()
     if (this.type === 'number') {
       if (this._value === undefined) return 0
       return this._value as number
@@ -33,6 +38,16 @@ export class Stat implements StatModel{
     else if (this.type === 'string') {
       this._value = value as string
     }
+  }
+
+  private evalCompoundStat (): number {
+    logDebug('Evaluating compound stat', this.formula)
+    let formula = this.formula || '-1'
+    this._sheet.statKeys().forEach(key => {
+      if (this._sheet.getStat(key)?.type === 'composite') return
+      formula = formula.replace(key, ''+ (this._sheet.getStat(key)?.value || 0))
+    })
+    return evaluate(formula)
   }
 
 }
@@ -63,15 +78,23 @@ export class CharacterSheet {
     return this._model
   }
 
+  statKeys (): string[] {
+    return Array.from(this._stats.keys())
+  }
+
   private initializeStats() {
     Object.keys(this._model.stats).forEach(statName => {
       if (this._stats.has(statName)) return
 
+      const modelStat = this._model.stats[statName]
+
       // Create a character stat for each stat in the current model
       const stat = new Stat(
-        this._model.stats[statName].type, 
-        this._model.stats[statName].initialValue
+        this,
+        modelStat.type
       )
+      if (modelStat.initialValue) stat.value = modelStat.initialValue
+      if (modelStat.formula) stat.formula = modelStat.formula
       this._stats.set(statName, stat)
     })
   }

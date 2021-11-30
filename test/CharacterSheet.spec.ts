@@ -118,4 +118,30 @@ describe('CharacterSheet', () => {
     }}
     expect(sheet.getStat('strength')?.value).toEqual(1)
   })
+
+  it('should support setting a composite stat, with a formula', () => {
+    const sheet = new CharacterSheet('test')
+    sheet.model = { id: 'test', stats: {
+      strength: {
+        type: 'composite',
+        formula: '2 + 2'
+      }
+    }}
+    expect(sheet.getStat('strength')?.value).toEqual(4)
+  })
+
+  it('should support setting a composite stat, with a formula of stats', () => {
+    const sheet = new CharacterSheet('test')
+    sheet.model = { id: 'test', stats: {
+      strength: {
+        type: 'composite',
+        formula: '10 + dexterity'
+      },
+      dexterity: {
+        type: 'number',
+        initialValue: 11
+      }
+    }}
+    expect(sheet.getStat('strength')?.value).toEqual(21)
+  })
 })
