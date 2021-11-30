@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/villetakanen/charna/compare/v0.1.0...v0.1.1) (2021-11-30)
+
+
+### Features
+
+* supports composite stats ([6934a45](https://github.com/villetakanen/charna/commit/6934a45c4ffc40716d391f228f48fa9f8b4dd5ab))
+
 ## 0.1.0 (2021-11-30)
 
 
