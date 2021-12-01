@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/villetakanen/charna/compare/v0.1.2...v0.1.3) (2021-12-01)
+
+
+### Features
+
+* supports named sheets ([a3054bc](https://github.com/villetakanen/charna/commit/a3054bc10f82f2722cf15834b07cea3532956404))
+
+
+### Bug Fixes
+
+* the quick sheet added ([477eedf](https://github.com/villetakanen/charna/commit/477eedfcc443df0f81abe0a593153acf5e41d066))
+
 ### [0.1.2](https://github.com/villetakanen/charna/compare/v0.1.1...v0.1.2) (2021-11-30)
 
 
