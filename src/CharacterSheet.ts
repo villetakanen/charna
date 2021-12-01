@@ -4,6 +4,8 @@ import { evaluate } from 'mathjs'
 import { logDebug } from './utils/logger'
 import { Charna } from '.'
 
+const _NUMBER_VALUE_TYPES = ['number', 'toggle']
+
 export class Stat implements StatModel{
   type: string
   private _value: number|string|undefined
@@ -22,7 +24,7 @@ export class Stat implements StatModel{
 
   get value(): number|string {
     if (this._isComposite) return this.evalCompoundStat()
-    if (this.type === 'number') {
+    if (_NUMBER_VALUE_TYPES.includes(this.type)) {
       if (this._value === undefined) return 0
       return this._value as number
     }
@@ -33,10 +35,10 @@ export class Stat implements StatModel{
     if (this._isComposite) {
       throw new Error('Cannot set value on a composite stat')
     }
-    if (this.type === 'number') {
+    if (_NUMBER_VALUE_TYPES.includes(this.type)) {
       this._value = value as number
     }
-    else if (this.type === 'string') {
+    else {
       this._value = value as string
     }
   }

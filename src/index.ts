@@ -3,6 +3,7 @@ import { CharacterSheet } from './CharacterSheet'
 import { SheetModel } from './models/SheetModel'
 import basicSheet from './sheets/basic.sheet.json'
 import fantasySheet from './sheets/fantasy.sheet.json'
+import theQuickSheet from './sheets/thequickrpg.sheet.json'
 
 class Charna {
   private static _sheets: Map<string, SheetModel> = new Map()
@@ -22,6 +23,7 @@ class Charna {
 
 Charna.useSheetModel('basic', basicSheet)
 Charna.useSheetModel('fantasy', fantasySheet)
+Charna.useSheetModel('thequickrpg', theQuickSheet)
 
 export {
   Charna,

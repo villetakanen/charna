@@ -1,0 +1,70 @@
+{
+  "name": "The Quick RPG",
+  "meta": {
+    "license": "CC BY-NC-SA 4.0",
+    "author": "The Quick RPG Team",
+    "version": "1.0.0",
+    "website": "https://thequickrpg.com"
+  },
+  "stats": {
+    "character_name": {
+      "type": "text"
+    },
+    "callsign": {
+      "type": "text"
+    },
+    "concept": {
+        "type": "text-box"
+    },
+    "backgrounds": {
+      "type": "text-box"
+    },
+    "specialties": {
+        "type": "text-box"
+    },
+    "powers": {
+      "type": "text-box"
+    },
+    "motivation": {
+      "type": "text"
+    },
+    "flaws": {
+      "type": "text"
+    },
+    "Other Aspects": {
+      "type": "text-box"
+    },
+    "Contacts": {
+      "type": "text-box"
+    },
+    "harm_1": {
+      "type": "toggle",
+      "levels": 2,
+      "label": true
+    },
+    "harm_2": {
+      "type": "toggle",
+      "levels": 2,
+      "label": true
+    },
+    "harm_3": {
+      "type": "toggle",
+      "levels": 2,
+      "label": true
+    },
+    "harm_4": {
+      "type": "toggle",
+      "levels": 2,
+      "label": true
+    },
+    "harm_5": {
+      "type": "toggle",
+      "levels": 2,
+      "label": true
+    },
+    "threat_dice_from_harm": {
+      "type": "composite",
+      "formula": "(harm_1 > 0) * 1 + (harm_2 > 0) * 1 + (harm_3 > 0) * 1 + (harm_4 > 0) * 1 + (harm_5 > 0) * 1"
+    }
+  }
+}
