@@ -1,4 +1,4 @@
-import { CharacterSheet } from '../src'
+import { CharacterSheet, Charna } from '../src'
 
 describe('CharacterSheet', () => {
   it('should be defined', () => {
@@ -18,14 +18,14 @@ describe('CharacterSheet', () => {
   it('initiate a character sheet model', () => {
     const sheet = new CharacterSheet('test')
     expect(sheet.model).toBeDefined()
-    const m = { id: 'test', stats: {}}
+    const m = { name: 'test', stats: {}}
     sheet.model = m
     expect(sheet.model).toEqual(m) 
   })
 
   it('should initialize stats for a model', () => {
     const sheet = new CharacterSheet('test')
-    const m = { id: 'test', stats: {
+    const m = { name: 'test', stats: {
       strength: {
         type: 'number'
       },
@@ -41,7 +41,7 @@ describe('CharacterSheet', () => {
 
   it('should support setting stats, in the sheet-model', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       strength: {
         type: 'number'
       }
@@ -52,7 +52,7 @@ describe('CharacterSheet', () => {
 
   it('should support setting string stats', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       name: {
         type: 'string'
       }
@@ -63,14 +63,14 @@ describe('CharacterSheet', () => {
 
   it('should not support setting stats, not in the sheet-model', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {}}
+    sheet.model = { name: 'test', stats: {}}
     sheet.setStat('invalid', 1)
     expect(sheet.getStat('invalid')).toBeUndefined()
   })
 
   it('should throw an error when setting a composite stat', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       strength: {
         type: 'composite'
       }
@@ -80,7 +80,7 @@ describe('CharacterSheet', () => {
 
   it('should support setting a model', () => {
     const sheet = new CharacterSheet('test')
-    const m = { id: 'test', stats: {
+    const m = { name: 'test', stats: {
       strength: {
         type: 'number'
       }
@@ -91,26 +91,26 @@ describe('CharacterSheet', () => {
 
   it('should support setting an empty model', () => {
     const sheet = new CharacterSheet('test')
-    const m = { id: 'test', stats: {
+    const m = { name: 'test', stats: {
       strength: {
         type: 'number'
       }
     }}
     sheet.model = m
-    sheet.model = { id: '', stats: {}}
-    expect(sheet.model).toEqual({ id: '', stats: {}})
+    sheet.model = { name: '', stats: {}}
+    expect(sheet.model).toEqual({ name: '', stats: {}})
   })
 
   it ('should not reinitialize a stat', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       strength: {
         type: 'number',
         initialValue: 10
       }
     }}
     sheet.setStat('strength', 1)
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       strength: {
         type: 'number',
         initialValue: 11
@@ -121,7 +121,7 @@ describe('CharacterSheet', () => {
 
   it('should support setting a composite stat, with a formula', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       strength: {
         type: 'composite',
         formula: '2 + 2'
@@ -132,7 +132,7 @@ describe('CharacterSheet', () => {
 
   it('should support setting a composite stat, with a formula of stats', () => {
     const sheet = new CharacterSheet('test')
-    sheet.model = { id: 'test', stats: {
+    sheet.model = { name: 'test', stats: {
       strength: {
         type: 'composite',
         formula: '10 + dexterity'
@@ -147,7 +147,7 @@ describe('CharacterSheet', () => {
 
   it('should distill to consumable json', () => {
     const sheet = new CharacterSheet('test-sheet')
-    sheet.model = { id: 'test-sheet-model', stats: {
+    sheet.model = { name: 'test-sheet-model', stats: {
       strength: {
         type: 'composite',
         formula: '10 + dexterity'
@@ -166,5 +166,12 @@ describe('CharacterSheet', () => {
         dexterity: 11
       }
     })
+  })
+
+  it('should support named sheetModels', () => {
+    const sheet = new CharacterSheet('test-sheet')
+    sheet.model = 'fantasy'
+    expect(sheet.model).toEqual(Charna.getSheetModel('fantasy'))
+    expect(sheet.getStat('strength')?.value).toEqual(10)
   })
 })

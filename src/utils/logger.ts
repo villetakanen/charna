@@ -1,3 +1,5 @@
+import { Charna } from ".."
+
 export function logDebug(...args: unknown[]): void {
-  console.debug(args)
+  if (Charna.debugMode) console.debug('🦊 Charna',args)
 }

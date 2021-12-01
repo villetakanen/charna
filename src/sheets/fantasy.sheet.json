@@ -1,0 +1,65 @@
+{
+  "name": "A Basic Fantasy -style charactersheet, in the veins of D&D and OSR games",
+  "stats": {
+    "strength": {
+      "type": "number",
+      "initialValue": 10
+    },
+    "dexterity": {
+        "type": "number",
+        "initialValue": 10
+    },
+    "constitution": {
+        "type": "number",
+        "initialValue": 10
+    },
+    "intelligence": {
+        "type": "number",
+        "initialValue": 10
+    },
+    "wisdom": {
+        "type": "number",
+        "initialValue": 10
+    },
+    "charisma": {
+        "type": "number",
+        "initialValue": 10
+    },
+    "hitpoints": {
+        "type": "resource",
+        "initialValue": 8
+    },
+    "proficiency": {
+        "type": "number",
+        "initialValue": 2
+    },
+    "strength_bonus": {
+        "type": "composite",
+        "formula": "(strength-10) / 2"
+    },
+    "dexterity_bonus": {
+        "type": "composite",
+        "formula": "(dexterity-10) / 2"
+    },
+    "constitution_bonus": {
+        "type": "composite",
+        "formula": "(constitution-10) / 2"
+    },
+    "intelligence_bonus": {
+        "type": "composite",
+        "formula": "(intelligence-10) / 2"
+    },
+    "wisdom_bonus": {
+        "type": "composite",
+        "formula": "(wisdom-10) / 2"
+    },
+    "charisma_bonus": {
+        "type": "composite",
+        "formula": "(charisma-10) / 2"
+    },
+    "hitpoints_max": {
+        "type": "composite",
+        "formula": "hitpoints + constitution_bonus"
+    }
+  }
+}

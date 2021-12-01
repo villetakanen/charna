@@ -2,6 +2,7 @@ import { SheetModel} from './models/SheetModel'
 import { StatModel } from './models/StatModel'
 import { evaluate } from 'mathjs'
 import { logDebug } from './utils/logger'
+import { Charna } from '.'
 
 export class Stat implements StatModel{
   type: string
@@ -62,7 +63,7 @@ export class Stat implements StatModel{
  */
 export class CharacterSheet {
   id: string
-  private _model: SheetModel = { id: '', stats: {} }
+  private _model: SheetModel = { name: '', stats: {} }
   private _stats: Map<string, Stat> = new Map()
   
   constructor(id: string) {
@@ -79,8 +80,14 @@ export class CharacterSheet {
     if (stat) stat.value = value
   }
   
-  set model(model: SheetModel) {
-    this._model = model
+  set model(model: SheetModel|string) {
+    if (typeof model === 'string') {
+      const namedModel = Charna.getSheetModel(model)
+      if (!namedModel) throw new Error(`No sheet model named ${model}`)
+      this._model = namedModel
+    } else {
+      this._model = model
+    }
     this.initializeStats()
   }
 
@@ -118,7 +125,7 @@ export class CharacterSheet {
 
     return {
       id: this.id,
-      sheetModel: this._model.id,
+      sheetModel: this._model.name,
       stats: stats
     }
   }

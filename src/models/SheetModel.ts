@@ -1,11 +1,9 @@
 import { StatModel } from './StatModel'
 
 export interface SheetModel {
-  id: string // unique identifier for this sheet
+  name: string // unique identifier for this sheet
   meta?: {
-    system?: string // system identifier
-    game?: string // game identifier
-    player?: string // player identifier
+    [key: string]: string // arbitrary metadata
   },
   stats: { [key: string]: StatModel }
 }
